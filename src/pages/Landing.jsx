@@ -1,6 +1,6 @@
-import Navbar from "../components/navbar";
-import SearchBar from "../components/searchbar";
-import DoctorCard from "../components/doctorcard";
+import Navbar from "../components/Navbar";
+import SearchBar from "../components/SearchBar";
+import DoctorCard from "../components/DoctorCard";
 import { doctors } from "../data/doctors";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 export default function Landing() {
   const [filteredDoctors, setFilteredDoctors] = useState(doctors);
   const [currentImage, setCurrentImage] = useState(0);
-  const [fade, setFade] = useState(true);
 
   const images = [
     "/images/doctor1.jpg",
@@ -29,16 +28,11 @@ export default function Landing() {
   // 🖼 Background Slideshow with Smooth Fade
   useEffect(() => {
     const interval = setInterval(() => {
-      setFade(false); // start fade out
-
-      setTimeout(() => {
-        setCurrentImage((prev) => (prev + 1) % images.length);
-        setFade(true); // fade in
-      }, 500); // fade duration
+      setCurrentImage((prev) => (prev + 1) % images.length);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [images.length]);
 
   return (
     <>

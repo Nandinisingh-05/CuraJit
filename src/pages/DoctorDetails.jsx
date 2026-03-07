@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { doctors } from "../data/doctors";
-import Navbar from "../components/navbar";
-import { useState, useEffect } from "react";
+import Navbar from "../components/Navbar";
+import { useState } from "react";
 
 export default function DoctorDetails() {
   const { id } = useParams();
@@ -11,14 +11,13 @@ export default function DoctorDetails() {
 
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
-  const [bookings, setBookings] = useState([]);
+  const [bookings] = useState(() => {
+    const stored = localStorage.getItem("appointments");
+    return stored ? JSON.parse(stored) : [];
+  });
 
   const timeSlots = ["09:00 AM", "11:00 AM", "02:00 PM", "04:00 PM"];
 
-  useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("appointments")) || [];
-    setBookings(stored);
-  }, []);
 
   if (!doctor) {
     return (

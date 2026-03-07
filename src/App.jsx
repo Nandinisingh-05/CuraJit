@@ -8,7 +8,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import About from "./pages/About";
 
-import { AuthContext } from "./context/AuthContext";
+import { AuthContext } from "./context/auth-context";
 
 function ProtectedRoute({ children }) {
   const { user } = useContext(AuthContext);

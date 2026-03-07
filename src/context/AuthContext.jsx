@@ -1,14 +1,13 @@
-import { createContext, useState, useEffect } from "react";
+import { useState } from "react";
+import { AuthContext } from "./auth-context";
 
-export const AuthContext = createContext();
+function getStoredUser() {
+  const rawUser = localStorage.getItem("currentUser");
+  return rawUser ? JSON.parse(rawUser) : null;
+}
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("currentUser"));
-    if (storedUser) setUser(storedUser);
-  }, []);
+  const [user, setUser] = useState(getStoredUser);
 
   const login = (email, password) => {
     const users = JSON.parse(localStorage.getItem("users")) || [];
