@@ -13,10 +13,15 @@
   }
 }
 
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 .animate-fadeIn {
   animation: fadeIn 0.8s ease forwards;
 }
 html {
   scroll-behavior: smooth;
 }
-
